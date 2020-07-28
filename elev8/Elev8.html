@@ -23,7 +23,7 @@
 	<!--canvas-->
 	<canvas id="myCanvas" width="300" height="200" style="border:0px solid #d3d3d3;">
 		Your browser does not support the HTML5 canvas tag.</canvas>
-		
+
 	<script>
 		var c = document.getElementById("myCanvas");
 		var ctx = c.getContext("2d");
@@ -104,6 +104,103 @@ var currentString3Strum = -1;
 var currentString4Strum = -1;
 var currentString5Strum = -1;
 var currentString6Strum = -1;
+
+window.onload = function() {
+	//This will handle MIDI connections
+	// 	connectMIDI();
+	loadMusicImage();
+	 };
+
+function play() {
+
+	MIDI.loadPlugin({
+		soundfontUrl: "./soundfont_guitar/",
+		instrument: "acoustic_guitar_steel",
+		onprogress: function(state, progress) {
+			console.log(state, progress);
+		},
+		onsuccess: function() {
+
+			var delay = 0; // play one note every quarter second
+			var note1 = 50; // the MIDI note
+			var velocity = 127; // how hard the note hits
+			// play the note
+			MIDI.programChange(0, MIDI.GM.byName["acoustic_guitar_steel"].number); // select correct instrument
+			MIDI.setVolume(0, 300);
+			MIDI.noteOn(0, note1, velocity, delay);
+			MIDI.noteOff(0, note1, delay + 0.75);
+
+			var note2 = 52; // the MIDI note
+			MIDI.noteOn(0, note2, velocity, delay);
+			MIDI.noteOff(0, note2, delay + 0.75);
+
+			var c = document.getElementById("myCanvas");
+			var ctx = c.getContext("2d");
+			ctx.beginPath();
+			ctx.arc(70,130,10,0,2*Math.PI);
+			ctx.fill();
+
+			var c = document.getElementById("myCanvas");
+			var ctx = c.getContext("2d");
+			ctx.beginPath();
+			ctx.arc(70,110,10,0,2*Math.PI);
+			ctx.fill();
+		}
+	});
+};
+
+function loadMusicImage()
+{
+  var sheetMusicIMG = document.createElement("IMG");
+  sheetMusicIMG.setAttribute("src", "src/BrownEyedGirlSheet.png");
+//  x.setAttribute("width", "304");
+//  x.setAttribute("height", "228");
+  sheetMusicIMG.setAttribute("alt", "Guitar heet music for the first verse of Brown Eyed Girl");
+  document.body.appendChild(sheetMusicIMG);
+}
+
+	function connectMIDI ()
+	{
+		if (navigator.requestMIDIAccess) {
+			console.log("WebMIDI supported");
+		} else {
+				console.log('WebMIDI is not supported in this browser.');
+		}
+		navigator.requestMIDIAccess({ sysex: true }).then(onMIDISuccess, onMIDIFailure);
+}
+
+	function onMIDISuccess(midiAccess) {
+		    console.log(midiAccess);
+				console.log('Request succeeded.');
+
+		   var inputs = midiAccess.inputs;
+				//var inputs = [0,1,2];
+		    //var outputs = midiAccess.outputs;
+			 //
+			// 	for (var input of midiAccess.inputs.values())
+			// 		 input.onmidimessage = getMIDIMessage;
+			//  }
+
+}
+
+	function onMIDIFailure() {
+	    console.log('Could not access your MIDI devices.');
+	}
+
+	function getMIDIMessage(midiMessage) {
+	   // console.log(midiMessage);
+			//[144, 72, 64]
+			var command = message.data[0];
+			var note = message.data[1];
+			var velocity = message.data[2];
+
+			 switch (command) {
+					 case 0: // noteOn
+							 if (velocity == 2) {
+								console.log("success in command")
+			 			}
+					}
+			}
 
 function onStrum(strumString) {
 	MIDI.loadPlugin({
@@ -422,6 +519,43 @@ function onReleaseFret(neckString) {
 			console.log("Invalid neck string.");
 	}
 };
+
+		function onMIDISuccess(midiAccess) {
+			    console.log(midiAccess);
+					console.log('Could access your MIDI devices.');
+
+			   // var inputs = midiAccess.inputs;
+			    var outputs = midiAccess.outputs;
+
+					for (var input of midiAccess.inputs.values())
+						 input.onmidimessage = getMIDIMessage;
+				 }
+
+
+			function onMIDIFailure() {
+			    console.log('Could not access your MIDI devices.');
+			}
+
+			function getMIDIMessage(midiMessage) {
+			    console.log(midiMessage);
+					var command = message.data[0];
+					 var note = message.data[1];
+					 var velocity = (message.data.length > 2) ? message.data[2] : 0; // a velocity value might not be included with a noteOff command
+
+					 switch (command) {
+							 case 144: // noteOn
+									 if (velocity > 0) {
+											 noteOn(note, velocity);
+									 } else {
+											 noteOff(note);
+									 }
+									 break;
+							 case 128: // noteOff
+									 noteOff(note);
+									 break;
+							 // we could easily expand this switch statement to cover other types of commands such as controllers or sysex
+					 }
+			}
 
 </script>
 </body>
