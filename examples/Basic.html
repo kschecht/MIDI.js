@@ -19,7 +19,7 @@
 	<button onclick="play()">Make Noise</button>
 	<canvas id="myCanvas" width="300" height="200" style="border:0px solid #d3d3d3;">
 		Your browser does not support the HTML5 canvas tag.</canvas>
-		
+
 	<script>
 		var c = document.getElementById("myCanvas");
 		var ctx = c.getContext("2d");
@@ -92,6 +92,13 @@ function play() {
 			console.log(state, progress);
 		},
 		onsuccess: function() {
+
+			if (navigator.requestMIDIAccess) {
+    console.log('This browser supports WebMIDI!');
+} else {
+    console.log('WebMIDI is not supported in this browser.');
+}
+
 			var delay = 0; // play one note every quarter second
 			var note1 = 41; // the MIDI note
 			var velocity = 127; // how hard the note hits
