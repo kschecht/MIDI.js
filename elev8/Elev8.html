@@ -89,13 +89,13 @@
 
 const longestNoteLength = 1000;
 
-// notes held down on frets for each string
-var neckNote1 = new Note(1, 0);
-var neckNote2 = new Note(2, 0);
-var neckNote3 = new Note(3, 0);
-var neckNote4 = new Note(4, 0);
-var neckNote5 = new Note(5, 0);
-var neckNote6 = new Note(6, 0);
+// notes held down on frets for each string, default all open strings
+var neckNote1 = new Note(0, 0);
+var neckNote2 = new Note(1, 0);
+var neckNote3 = new Note(2, 0);
+var neckNote4 = new Note(3, 0);
+var neckNote5 = new Note(4, 0);
+var neckNote6 = new Note(5, 0);
 
 // strum status of each string, -1 if not vibrating from strum, note being played if vibrating from strum
 var currentString1Strum = -1;
@@ -119,11 +119,12 @@ function onStrum(strumString) {
 			MIDI.setVolume(0, 300);
 
 			switch (strumString) {
-				case 1:
+				case 0:
 					var midiNote = neckNote1.jsMidiId; // the MIDI note
 				
 					if (currentString1Strum != -1) {
 						MIDI.noteOff(0, currentString1Strum, 0);
+						// removeChordVisual();
 					}
 					MIDI.noteOn(0, midiNote, velocity, delay);
 					// addStrumVisual();
@@ -135,14 +136,16 @@ function onStrum(strumString) {
 							MIDI.noteOff(0, midiNote, delay);
 							currentString1Strum = null;
 							// removeStrumVisual(string1);
+							// removeChordVisual();
 						}
 					},longestNoteLength);
 					break;
-				case 2:
+				case 1:
 					var midiNote = neckNote2.jsMidiId; // the MIDI note
 					
 					if (currentString2Strum != -1) {
 						MIDI.noteOff(0, currentString2Strum, 0);
+						// removeChordVisual();
 					}
 					MIDI.noteOn(0, midiNote, velocity, delay);
 					// addStrumVisual();
@@ -154,14 +157,16 @@ function onStrum(strumString) {
 							MIDI.noteOff(0, midiNote, delay);
 							currentString2Strum = null;
 							// removeStrumVisual(string2);
+							// removeChordVisual();
 						}
 					},longestNoteLength);
 					break;
-				case 3:
+				case 2:
 					var midiNote = neckNote3.jsMidiId; // the MIDI note
 					
 					if (currentString3Strum != -1) {
 						MIDI.noteOff(0, currentString3Strum, 0);
+						// removeChordVisual();
 					}
 					MIDI.noteOn(0, midiNote, velocity, delay);
 					// addStrumVisual();
@@ -173,14 +178,16 @@ function onStrum(strumString) {
 							MIDI.noteOff(0, midiNote, delay);
 							currentString3Strum = null;
 							// removeStrumVisual(string3);
+							// removeChordVisual();
 						}
 					},longestNoteLength);
 					break;
-				case 4:
+				case 3:
 					var midiNote = neckNote4.jsMidiId; // the MIDI note
 					
 					if (currentString4Strum != -1) {
 						MIDI.noteOff(0, currentString4Strum, 0);
+						// removeChordVisual();
 					}
 					MIDI.noteOn(0, midiNote, velocity, delay);
 					// addStrumVisual();
@@ -192,14 +199,16 @@ function onStrum(strumString) {
 							MIDI.noteOff(0, midiNote, delay);
 							currentString4Strum = null;
 							// removeStrumVisual(string4);
+							// removeChordVisual();
 						}
 					},longestNoteLength);
 					break;
-				case 5:
+				case 4:
 					var midiNote = neckNote5.jsMidiId; // the MIDI note
 					
 					if (currentString5Strum != -1) {
 						MIDI.noteOff(0, currentString5Strum, 0);
+						// removeChordVisual();
 					}
 					MIDI.noteOn(0, midiNote, velocity, delay);
 					// addStrumVisual();
@@ -211,14 +220,16 @@ function onStrum(strumString) {
 							MIDI.noteOff(0, midiNote, delay);
 							currentString5Strum = null;
 							// removeStrumVisual(string5);
+							// removeChordVisual();
 						}
 					},longestNoteLength);
 					break;
-				case 6:
+				case 5:
 					var midiNote = neckNote6.jsMidiId; // the MIDI note
 					
 					if (currentString6Strum != -1) {
 						MIDI.noteOff(0, currentString6Strum, 0);
+						// removeChordVisual();
 					}
 					MIDI.noteOn(0, midiNote, velocity, delay);
 					// addStrumVisual();
@@ -230,6 +241,7 @@ function onStrum(strumString) {
 							MIDI.noteOff(0, midiNote, delay);
 							currentString6Strum = -1;
 							// removeStrumVisual(string6);
+							// removeChordVisual();
 						}
 					},longestNoteLength);
 					break;
@@ -242,7 +254,7 @@ function onStrum(strumString) {
 
 function onPressFret(fret, neckString) {
 	switch (neckString) {
-		case 1:
+		case 0:
 			if (neckNote1.fret != fret) {
 				// removePressVisual(string1);
 			}
@@ -255,8 +267,9 @@ function onPressFret(fret, neckString) {
 				MIDI.noteOff(0, currentString1Strum, delay);
 				currentString1Strum = -1;
 				// removeStrumVisual(string1);
+				// removeChordVisual();
 			}
-		case 2:
+		case 1:
 			if (neckNote2.fret != fret) {
 				// removePressVisual(string2);
 			}
@@ -269,8 +282,9 @@ function onPressFret(fret, neckString) {
 				MIDI.noteOff(0, currentString2Strum, delay);
 				currentString2Strum = -1;
 				// removeStrumVisual(string2);
+				// removeChordVisual();
 			}
-		case 3:
+		case 2:
 			if (neckNote3.fret != fret) {
 				// removePressVisual(string3);
 			}
@@ -283,8 +297,9 @@ function onPressFret(fret, neckString) {
 				MIDI.noteOff(0, currentString3Strum, delay);
 				currentString3Strum = -1;
 				// removeStrumVisual(string3);
+				// removeChordVisual();
 			}
-		case 4:
+		case 3:
 			if (neckNote4.fret != fret) {
 				// removePressVisual(string4);
 			}
@@ -297,8 +312,9 @@ function onPressFret(fret, neckString) {
 				MIDI.noteOff(0, currentString4Strum, delay);
 				currentString4Strum = -1;
 				// removeStrumVisual(string4);
+				// removeChordVisual();
 			}
-		case 5:
+		case 4:
 			if (neckNote5.fret != fret) {
 				// removePressVisual(string5);
 			}
@@ -311,8 +327,9 @@ function onPressFret(fret, neckString) {
 				MIDI.noteOff(0, currentString5Strum, delay);
 				currentString5Strum = -1;
 				// removeStrumVisual(string5);
+				// removeChordVisual();
 			}
-		case 6:
+		case 5:
 			if (neckNote6.fret != fret) {
 				// removePressVisual(string6);
 			}
@@ -325,6 +342,7 @@ function onPressFret(fret, neckString) {
 				MIDI.noteOff(0, currentString6Strum, delay);
 				currentString6Strum = -1;
 				// removeStrumVisual(string6);
+				// removeChordVisual();
 			}
 		default:
 			console.log("Invalid neck string.");
@@ -334,7 +352,7 @@ function onPressFret(fret, neckString) {
 function onReleaseFret(neckString) {
 	// removePressVisual(neckString);
 	switch (neckString) {
-		case 1:
+		case 0:
 			neckNote1.fret = 0;
 			neckNote1.x = -1;
 			neckNote1.y = -1;
@@ -343,8 +361,9 @@ function onReleaseFret(neckString) {
 				MIDI.noteOff(0, currentString1Strum, delay);
 				currentString1Strum = -1;
 				//removeStrumVisual();
+				// removeChordVisual();
 			}
-		case 2:
+		case 1:
 			neckNote2.fret = 0;
 			neckNote2.x = -1;
 			neckNote2.y = -1;
@@ -353,8 +372,9 @@ function onReleaseFret(neckString) {
 				MIDI.noteOff(0, currentString2Strum, delay);
 				currentString2Strum = -1;
 				//removeStrumVisual();
+				// removeChordVisual();
 			}
-		case 3:
+		case 2:
 			neckNote3.fret = 0;
 			neckNote3.x = -1;
 			neckNote3.y = -1;
@@ -363,8 +383,9 @@ function onReleaseFret(neckString) {
 				MIDI.noteOff(0, currentString3Strum, delay);
 				currentString3Strum = -1;
 				//removeStrumVisual();
+				// removeChordVisual();
 			}
-		case 4:
+		case 3:
 			neckNote4.fret = 0;
 			neckNote4.x = -1;
 			neckNote4.y = -1;
@@ -373,8 +394,9 @@ function onReleaseFret(neckString) {
 				MIDI.noteOff(0, currentString4Strum, delay);
 				currentString4Strum = -1;
 				//removeStrumVisual();
+				// removeChordVisual();
 			}
-		case 5:
+		case 4:
 			neckNote5.fret = 0;
 			neckNote5.x = -1;
 			neckNote5.y = -1;
@@ -383,8 +405,9 @@ function onReleaseFret(neckString) {
 				MIDI.noteOff(0, currentString5Strum, delay);
 				currentString5Strum = -1;
 				//removeStrumVisual();
+				// removeChordVisual();
 			}
-		case 6:
+		case 5:
 			neckNote6.fret = 0;
 			neckNote6.x = -1;
 			neckNote6.y = -1;
@@ -393,7 +416,10 @@ function onReleaseFret(neckString) {
 				MIDI.noteOff(0, currentString6Strum, delay);
 				currentString6Strum = -1;
 				//removeStrumVisual();
+				// removeChordVisual();
 			}
+		default:
+			console.log("Invalid neck string.");
 	}
 };
 
