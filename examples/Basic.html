@@ -26,37 +26,30 @@
 			<button onclick="DRAWGUITAR.showChord('G')">G Chord</button> 
 			<button onclick="DRAWGUITAR.showChord('Em')">Em Chord</button> 
 			<button onclick="DRAWGUITAR.showChord('C')">C Chord</button> 
-			<button onclick="DRAWGUITAR.showChord('X')">Wrong Chord</button> 
+			<button onclick="DRAWGUITAR.showChord('?')">Wrong Chord</button> 
+			<button onclick="play()">Play</button> 
 		
         </div>
-		<div class="flex-container-vert" style="margin-left: 60px">
-			<div style="font: italic  bold 18px Arial;margin-left: 15px;">
-				You are playing a: 
+		<div class="flex-container-vert" style="margin-left: 60px;">
+			<div style="font: italic  bold 18px Arial;margin-left: 15px">
+				You are playing a:
 			</div>
-			<div style="font: italic  bold 48px Arial;margin-left: 15px;text-align: center;">
-				C
+			<div id="chordName" style="font: italic  bold 48px Arial;margin-left: 15px;text-align: center;">
+				&#8205;
 			</div>
 			<canvas id="fretBoard" width="340" height="400" style="border:0px solid #000000;">
                 Your browser does not support the HTML5 canvas tag.</canvas>
             <canvas id="strummer" width="300" height="200" style="border:0px solid #d3d3d3;">
-                Your browser does not support the HTML5 canvas tag.</canvas>
+				Your browser does not support the HTML5 canvas tag.</canvas>
 		</div>
-        <div class="flex-container-vert" style="margin-left: 60px">
-			<img src="./images/BrownEyedGirlSheet.png" />
+		<!-- <div class="flex-container-vert"/>
+		</div> -->
+		<div class="flex-container-vert" style="margin-left: 60px;display: block;">
+			<!-- <canvas id="gChord" width="75" height="100" style="border:0px solid #d3d3d3;"/> -->
+			<!-- <canvas id="emChord" width="75" height="100" style="border:0px solid #d3d3d3;"/> -->
+				<img src="./images/BrownEyedGirlSheet.png" />
 		</div>
     </div>
-	<!-- <button onclick="play()">Make Noise</button>
-	<button onclick="DRAWGUITAR.showChord('D')">D Chord</button> 
-	<button onclick="DRAWGUITAR.showChord('G')">G Chord</button> 
-	<button onclick="DRAWGUITAR.showChord('Em')">Em Chord</button> 
-	<button onclick="DRAWGUITAR.showChord('C')">C Chord</button> 
-	<button onclick="DRAWGUITAR.showChord('X')">Wrong Chord</button> 
- -->
-	<!-- <button onclick="test()">All Positions</button>  -->
-
-	<!-- <canvas id="fretBoard" width="340" height="400" style="border:0px solid #000000;position: absolute; left: 20; top: 60; z-index: 0;"/>  -->
-
-
 <script>
 	DRAWGUITAR.drawFretboard();
 function test() {
@@ -89,6 +82,8 @@ function test() {
 		var c = document.getElementById("strummer");
 		var ctx = c.getContext("2d");
 		// vertical lines
+		// var xStart=10
+		// var yStart=35
 		ctx.beginPath();
 		ctx.moveTo(10, 35);
 		ctx.lineTo(10, 85);
@@ -163,6 +158,143 @@ function test() {
 	ctx.fill();
 }
 
+		//Em
+		// var c = document.getElementById("emChord");
+		// var ctx = c.getContext("2d");
+		// // vertical lines
+		// ctx.beginPath();
+		// ctx.moveTo(5, 0);
+		// ctx.lineTo(5, 100);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(18, 0);
+		// ctx.lineTo(18, 100);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(31, 0);
+		// ctx.lineTo(31, 100);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(44, 0);
+		// ctx.lineTo(44, 100);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(57, 0);
+		// ctx.lineTo(57, 100);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(70, 0);
+		// ctx.lineTo(70, 100);
+		// ctx.stroke();
+		// // horizontal lines
+		// ctx.beginPath();
+		// ctx.moveTo(5, 0);
+		// ctx.lineTo(70, 0);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(5, 3);
+		// ctx.lineTo(70, 3);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(5, 34);
+		// ctx.lineTo(70, 34);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(5, 67);
+		// ctx.lineTo(70, 67);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(5, 100);
+		// ctx.lineTo(70, 100);
+		// ctx.stroke();
+
+		// // circles
+		// ctx.beginPath();
+		// ctx.arc(18,50,5,0,2*Math.PI);
+		// ctx.fill();
+
+		// ctx.beginPath();
+		// ctx.arc(31,50,5,0,2*Math.PI);
+		// ctx.fill();
+		// var c = document.getElementById("gChord");
+		// var ctx = c.getContext("2d");
+		// // vertical lines
+		// ctx.beginPath();
+		// ctx.moveTo(5, 0);
+		// ctx.lineTo(5, 100);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(18, 0);
+		// ctx.lineTo(18, 100);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(31, 0);
+		// ctx.lineTo(31, 100);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(44, 0);
+		// ctx.lineTo(44, 100);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(57, 0);
+		// ctx.lineTo(57, 100);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(70, 0);
+		// ctx.lineTo(70, 100);
+		// ctx.stroke();
+		// // horizontal lines
+		// ctx.beginPath();
+		// ctx.moveTo(5, 0);
+		// ctx.lineTo(70, 0);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(5, 3);
+		// ctx.lineTo(70, 3);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(5, 34);
+		// ctx.lineTo(70, 34);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(5, 67);
+		// ctx.lineTo(70, 67);
+		// ctx.stroke();
+
+		// ctx.beginPath();
+		// ctx.moveTo(5, 100);
+		// ctx.lineTo(70, 100);
+		// ctx.stroke();
+
+		// // circles
+		// ctx.beginPath();
+		// ctx.arc(18,50,5,0,2*Math.PI);
+		// ctx.fill();
+
+		// ctx.beginPath();
+		// ctx.arc(5,84,5,0,2*Math.PI);
+		// ctx.fill();
+
+		// ctx.beginPath();
+		// ctx.arc(70,84,5,0,2*Math.PI);
+		// ctx.fill();
 </script>		
 </head>
 <body>
