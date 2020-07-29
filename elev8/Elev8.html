@@ -20,6 +20,16 @@
 	<canvas id="myCanvas" width="300" height="200" style="border:0px solid #d3d3d3;">
 		Your browser does not support the HTML5 canvas tag.</canvas>
 
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			var socket = io.connect('/');
+      socket.on('emit_serial_data', function (data) {
+        console.log(data);
+        alert('got a message!');
+      });
+		</script>
+
+
 	<script>
 		var c = document.getElementById("myCanvas");
 		var ctx = c.getContext("2d");

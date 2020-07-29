@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <head>
+        <script src='/socket.io/socket.io.js'></script>
+        <script>
+           var socket = io.connect("http//localhost"); //connect to server
+            //console.log("hi");
+            socket.on('emit_serial_data', function(data) { //As a temp data is received
+              console.log(data);
+         });
+
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
