@@ -21,7 +21,7 @@
 	<div class="flex-container-horiz">
         <div class="flex-container-vert">
             <button onclick="play()">Make Noise</button>
-			<button onclick="strumAll()">Strum All</button>
+			<button onclick="DRAWGUITAR.drawRectangle(1)">Strum</button>
 			<button onclick="DRAWGUITAR.showChord('D')">D Chord</button> 
 			<button onclick="DRAWGUITAR.showChord('G')">G Chord</button> 
 			<button onclick="DRAWGUITAR.showChord('Em')">Em Chord</button> 
@@ -59,6 +59,7 @@
 
 <script>
 	DRAWGUITAR.drawFretboard();
+	DRAWGUITAR.drawStrummer();
 function test() {
 	DRAWGUITAR.drawCircle(0, 0);
 	DRAWGUITAR.drawCircle(1, 0);
@@ -84,83 +85,6 @@ function test() {
 	DRAWGUITAR.drawCircle(1, 5);
 	DRAWGUITAR.drawCircle(2, 5);
 	
-}
-
-		var c = document.getElementById("strummer");
-		var ctx = c.getContext("2d");
-		// vertical lines
-		ctx.beginPath();
-		ctx.moveTo(10, 35);
-		ctx.lineTo(10, 85);
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.moveTo(40, 35);
-		ctx.lineTo(40, 85);
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.moveTo(70, 35);
-		ctx.lineTo(70, 85);
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.moveTo(100, 35);
-		ctx.lineTo(100, 85);
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.moveTo(130, 35);
-		ctx.lineTo(130, 85);
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.moveTo(160, 35);
-		ctx.lineTo(160, 85);
-		ctx.stroke();
-		// horizontal lines
-		ctx.beginPath();
-		ctx.moveTo(10, 35);
-		ctx.lineTo(160, 35);
-		ctx.stroke();
-
-		ctx.beginPath();
-		ctx.moveTo(10, 85);
-		ctx.lineTo(160, 85);
-		ctx.stroke();
-
-		function strumAll() {
-	var c = document.getElementById("strummer");
-	var ctx = c.getContext("2d");
-	ctx.beginPath();
-	ctx.fillStyle = "blue";
-	ctx.rect(5, 45, 10, 30);
-	ctx.fill();
-
-	ctx.beginPath();
-	ctx.fillStyle = "blue";
-	ctx.rect(35, 45, 10, 30);
-	ctx.fill();
-
-	ctx.beginPath();
-	ctx.fillStyle = "blue";
-	ctx.rect(65, 45, 10, 30);
-	ctx.fill();
-
-	ctx.beginPath();
-	ctx.fillStyle = "blue";
-	ctx.rect(95, 45, 10, 30);
-	ctx.fill();
-
-	ctx.beginPath();
-	ctx.fillStyle = "blue";
-	ctx.rect(125, 45, 10, 30);
-	ctx.fill();
-
-	ctx.beginPath();
-	ctx.fillStyle = "blue";
-	ctx.rect(155, 45, 10, 30);
-	ctx.fill();
 }
 
 </script>		
