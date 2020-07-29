@@ -1,14 +1,17 @@
 <!DOCTYPE html>
+<html xmlns = "http://www.w3.org/1999/xhtml">
 <html>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <head>
-        <script src='/socket.io/socket.io.js'></script>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+      <script src="/socket.io/socket.io.js"></script>
+
         <script>
-           var socket = io.connect("http//localhost"); //connect to server
-            //console.log("hi");
+           var socket = io.connect("http://localhost:4000"); //connect to server
+            console.log("hi");
             socket.on('emit_serial_data', function(data) { //As a temp data is received
-              console.log(data);
+             console.log(data);
          });
 
         </script>

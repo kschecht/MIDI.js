@@ -6,16 +6,26 @@
 
 //listen to local host
 var express = require('express');
-
+var path = require("path");
    var app = express();
    var http = require('http').Server(app);
    var server = http.listen(4000, "0.0.0.0", () => { //Start the server, listening on port 4000.
        console.log("Listening to requests on port 4000...");
    })
-   app.use(express.static('public')); //Send index.html page on GET /
+
+//    app.get('/', function(req, res, next) {
+//     res.send("Hello world");
+// });
+   // app.use(express.static('public')); //Send index.html page on GET /
+
+   // viewed at http://localhost:8080
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'));
+});
 
    var io = require('socket.io')(server); //Bind socket.io to our express server.
-   //var io = socket(server);
+
+//  var io = socket(server);
 
 
 //get serial port data
@@ -28,14 +38,13 @@ serialPort.on("open", () => {
   console.log('serial port open');
 });
 parser.on('data', data =>{
- //console.log(data);
+//console.log(data);
     io.emit('emit_serial_data', data);
     console.log("post emit");
 });
 //
 //
 //
-io.on('connection', (socket) => {
-      console.log("Someone connected."); //show a log as a new client connects.
-  });
-//
+io.on('connection', function(){
+  console.log('made socket connection');
+});
