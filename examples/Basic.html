@@ -19,6 +19,8 @@
 	<button onclick="play()">Make Noise</button>
 	<canvas id="myCanvas" width="300" height="200" style="border:0px solid #d3d3d3;">
 		Your browser does not support the HTML5 canvas tag.</canvas>
+	<canvas id="cChord" width="75" height="100"></canvas>
+	<canvas id="dChord" width="75" height="100"></canvas>
 
 	<script>
 		var c = document.getElementById("myCanvas");
@@ -78,6 +80,151 @@
 		ctx.moveTo(10, 185);
 		ctx.lineTo(160, 185);
 		ctx.stroke();
+	</script>
+	<script>
+		var c = document.getElementById("cChord");
+		var ctx = c.getContext("2d");
+		// vertical lines
+		ctx.beginPath();
+		ctx.moveTo(5, 0);
+		ctx.lineTo(5, 100);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(18, 0);
+		ctx.lineTo(18, 100);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(31, 0);
+		ctx.lineTo(31, 100);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(44, 0);
+		ctx.lineTo(44, 100);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(57, 0);
+		ctx.lineTo(57, 100);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(70, 0);
+		ctx.lineTo(70, 100);
+		ctx.stroke();
+		// horizontal lines
+		ctx.beginPath();
+		ctx.moveTo(5, 0);
+		ctx.lineTo(70, 0);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(5, 3);
+		ctx.lineTo(70, 3);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(5, 34);
+		ctx.lineTo(70, 34);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(5, 67);
+		ctx.lineTo(70, 67);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(5, 100);
+		ctx.lineTo(70, 100);
+		ctx.stroke();
+
+		// circles
+		ctx.beginPath();
+		ctx.arc(31,50,5,0,2*Math.PI);
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(18,84,5,0,2*Math.PI);
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(57,17,5,0,2*Math.PI);
+		ctx.fill();
+
+
+		var c = document.getElementById("dChord");
+		var ctx = c.getContext("2d");
+		// vertical lines
+		ctx.beginPath();
+		ctx.moveTo(5, 0);
+		ctx.lineTo(5, 100);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(18, 0);
+		ctx.lineTo(18, 100);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(31, 0);
+		ctx.lineTo(31, 100);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(44, 0);
+		ctx.lineTo(44, 100);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(57, 0);
+		ctx.lineTo(57, 100);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(70, 0);
+		ctx.lineTo(70, 100);
+		ctx.stroke();
+		// horizontal lines
+		ctx.beginPath();
+		ctx.moveTo(5, 0);
+		ctx.lineTo(70, 0);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(5, 3);
+		ctx.lineTo(70, 3);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(5, 34);
+		ctx.lineTo(70, 34);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(5, 67);
+		ctx.lineTo(70, 67);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.moveTo(5, 100);
+		ctx.lineTo(70, 100);
+		ctx.stroke();
+
+		// circles
+
+		ctx.beginPath();
+		ctx.arc(44,50,5,0,2*Math.PI);
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(57,84,5,0,2*Math.PI);
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.arc(70,50,5,0,2*Math.PI);
+		ctx.fill();
 	</script>
 </head>
 <body>
