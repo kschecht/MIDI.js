@@ -16,6 +16,7 @@ const fretHeight=50;
 const fretWidth=30;
 
 const circleRadius=20;
+const halfTriangleLength=20;
 const fretboardHeight=200;
 const correctFillColor = "#00FF00";
 const neutralFillColor = "#37FDFC";
@@ -84,7 +85,7 @@ root.drawFretboard = function () {
     ctx.stroke();
     };
 
-    root.drawCircle = function (row, col, correctChord) {
+    root.drawCircle = function (row, col) {
         var c = document.getElementById("fretBoard");
         var ctx = c.getContext("2d");
         ctx.beginPath();
@@ -92,15 +93,25 @@ root.drawFretboard = function () {
         var x = (xStart*scale) + ((col * fretWidth) * scale);
         var y = (yFretStart * scale) + (row * (fretHeight *scale)) - ((fretHeight*scale)/2)
         ctx.arc(x, y ,circleRadius,0,2*Math.PI);
-        if (correctChord) {
-            ctx.fillStyle= correctFillColor;
-        } else {
-            ctx.fillStyle= neutralFillColor;
-        }
+        ctx.fillStyle= correctFillColor;
         ctx.fill();
 
     };
 
+    root.drawTriangle = function (row, col) {
+        var c = document.getElementById("fretBoard");
+        var ctx = c.getContext("2d");
+        row = row + 1;
+        var x = (xStart*scale) + ((col * fretWidth) * scale);
+        var y = (yFretStart * scale) + (row * (fretHeight *scale)) - ((fretHeight*scale)/2)
+        ctx.beginPath();
+        ctx.moveTo(x, y-halfTriangleLength);
+        ctx.lineTo(x-halfTriangleLength, y+halfTriangleLength);
+        ctx.lineTo((x-halfTriangleLength) + (halfTriangleLength * 2), y+halfTriangleLength);
+        ctx.closePath();
+        ctx.fillStyle= neutralFillColor;
+        ctx.fill();
+    };
     
     // frets 0 - 17
     // C chord == [0][4], [1,2], [2,2]
@@ -164,6 +175,13 @@ root.showChord=function(chordName)
      correctChordFlag=false;
 
      switch (chordName) {
+        case 'D7':
+        // D7 Chord
+        frets[1][5]=true;
+        frets[1][3]=true;
+        frets[0][4]=true;
+        correctChordFlag=true;
+        break;
         case 'D':
         // D Chord
         frets[1][5]=true;
@@ -206,7 +224,6 @@ root.showChord=function(chordName)
     }
     drawChord(frets, correctChordFlag);
     updateChordIndicator(chordName)
-
 }
 
 
@@ -239,7 +256,6 @@ function updateChordIndicator(chordName)
 {
     var cn = document.getElementById("chordName");
     cn.innerText=chordName;
-
 }
 
 function drawChord(frets, correctChordFlag) {
@@ -250,7 +266,11 @@ for (row=0;row<3;row++)
     col=0;
     if (frets[row][col] == true)
     {
-        root.drawCircle(row, col, correctChordFlag);
+        if (correctChordFlag) {
+            root.drawCircle(row, col);
+        } else {
+            root.drawTriangle(row, col);
+        }
         updateNotesToPlay(row,col)
     }
 
@@ -258,7 +278,11 @@ for (row=0;row<3;row++)
     {
         if (frets[row][col] == true)
         {
-            root.drawCircle(row, col, correctChordFlag);
+            if (correctChordFlag) {
+                root.drawCircle(row, col);
+            } else {
+                root.drawTriangle(row, col);
+            }
             updateNotesToPlay(row,col)
         }
     }

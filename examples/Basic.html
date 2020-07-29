@@ -26,13 +26,14 @@
 			<button onclick="DRAWGUITAR.showChord('G')">G Chord</button> 
 			<button onclick="DRAWGUITAR.showChord('Em')">Em Chord</button> 
 			<button onclick="DRAWGUITAR.showChord('C')">C Chord</button> 
+			<button onclick="DRAWGUITAR.showChord('D7')">D7 Chord</button> 
 			<button onclick="DRAWGUITAR.showChord('?')">Wrong Chord</button> 
 			<button onclick="play()">Play</button> 
 		
         </div>
 		<div class="flex-container-vert" style="margin-left: 60px;">
 			<div style="font: italic  bold 18px Arial;margin-left: 15px">
-				You are playing a:
+				You are playing:
 			</div>
 			<div id="chordName" style="font: italic  bold 48px Arial;margin-left: 15px;text-align: center;">
 				&#8205;
@@ -47,7 +48,7 @@
 		<div class="flex-container-vert" style="margin-left: 60px;display: block;">
 			<!-- <canvas id="gChord" width="75" height="100" style="border:0px solid #d3d3d3;"/> -->
 			<!-- <canvas id="emChord" width="75" height="100" style="border:0px solid #d3d3d3;"/> -->
-				<img src="./images/BrownEyedGirlSheet.png" />
+				<img src="./images/BrownEyedGirlSheet.png" alt="Future update will include alternative text."/>
 		</div>
     </div>
 <script>
@@ -84,77 +85,86 @@ function test() {
 		// vertical lines
 		// var xStart=10
 		// var yStart=35
+		const strummerHeight=50
+		const strummerWidth=55;
+		xStartS=xStart+5;
 		ctx.beginPath();
-		ctx.moveTo(10, 35);
-		ctx.lineTo(10, 85);
+		ctx.moveTo(xStartS, yStart);
+		ctx.lineTo(xStartS, yStart + strummerHeight);
 		ctx.stroke();
 
 		ctx.beginPath();
-		ctx.moveTo(40, 35);
-		ctx.lineTo(40, 85);
+		ctx.moveTo(xStartS+(strummerWidth), yStart);
+		ctx.lineTo(xStartS+(strummerWidth), yStart + strummerHeight);
 		ctx.stroke();
 
 		ctx.beginPath();
-		ctx.moveTo(70, 35);
-		ctx.lineTo(70, 85);
+		ctx.moveTo(xStartS+(strummerWidth * 2), yStart);
+		ctx.lineTo(xStartS+(strummerWidth * 2), yStart + strummerHeight);
 		ctx.stroke();
 
 		ctx.beginPath();
-		ctx.moveTo(100, 35);
-		ctx.lineTo(100, 85);
+		ctx.moveTo(xStartS+(strummerWidth * 3), yStart);
+		ctx.lineTo(xStartS+(strummerWidth * 3), yStart + strummerHeight);
 		ctx.stroke();
 
 		ctx.beginPath();
-		ctx.moveTo(130, 35);
-		ctx.lineTo(130, 85);
+		ctx.moveTo(xStartS+(strummerWidth * 4), yStart);
+		ctx.lineTo(xStartS+(strummerWidth * 4), yStart + strummerHeight);
 		ctx.stroke();
 
 		ctx.beginPath();
-		ctx.moveTo(160, 35);
-		ctx.lineTo(160, 85);
+		ctx.moveTo(xStartS+(strummerWidth * 5), yStart);
+		ctx.lineTo(xStartS+(strummerWidth * 5), yStart + strummerHeight);
 		ctx.stroke();
 		// horizontal lines
 		ctx.beginPath();
-		ctx.moveTo(10, 35);
-		ctx.lineTo(160, 35);
+		ctx.moveTo(xStartS, yStart);
+		ctx.lineTo(xStartS+(strummerWidth * 5), yStart);
 		ctx.stroke();
 
 		ctx.beginPath();
-		ctx.moveTo(10, 85);
-		ctx.lineTo(160, 85);
+		ctx.moveTo(xStartS, yStart + strummerHeight);
+		ctx.lineTo(xStartS+(strummerWidth * 5), yStart + strummerHeight);
 		ctx.stroke();
 
 		function strumAll() {
+	var strumStartX = 10;
+	var strumStartY = 40;
+	var strummerIndX = 55;
+	var strummerIndHeigtht = 30;
+	var strummerIndWidth = 11;
+
 	var c = document.getElementById("strummer");
 	var ctx = c.getContext("2d");
 	ctx.beginPath();
 	ctx.fillStyle = "blue";
-	ctx.rect(5, 45, 10, 30);
+	ctx.rect(strumStartX, strumStartY, strummerIndWidth, strummerIndHeigtht);
 	ctx.fill();
 
 	ctx.beginPath();
 	ctx.fillStyle = "blue";
-	ctx.rect(35, 45, 10, 30);
+	ctx.rect(strumStartX +strummerIndX, strumStartY, strummerIndWidth, strummerIndHeigtht);
 	ctx.fill();
 
 	ctx.beginPath();
 	ctx.fillStyle = "blue";
-	ctx.rect(65, 45, 10, 30);
+	ctx.rect(strumStartX + (strummerIndX * 2), strumStartY, strummerIndWidth, strummerIndHeigtht);
 	ctx.fill();
 
 	ctx.beginPath();
 	ctx.fillStyle = "blue";
-	ctx.rect(95, 45, 10, 30);
+	ctx.rect(strumStartX + (strummerIndX * 3), strumStartY, strummerIndWidth, strummerIndHeigtht);
 	ctx.fill();
 
 	ctx.beginPath();
 	ctx.fillStyle = "blue";
-	ctx.rect(125, 45, 10, 30);
+	ctx.rect(strumStartX + (strummerIndX * 4), strumStartY, strummerIndWidth, strummerIndHeigtht);
 	ctx.fill();
 
 	ctx.beginPath();
 	ctx.fillStyle = "blue";
-	ctx.rect(155, 45, 10, 30);
+	ctx.rect(strumStartX + (strummerIndX * 5), strumStartY, strummerIndWidth, strummerIndHeigtht);
 	ctx.fill();
 }
 
