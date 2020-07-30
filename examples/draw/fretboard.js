@@ -245,7 +245,7 @@ function createUUID() {
  root.onStrum = function(strumString) {
 
     MIDI.loadPlugin({
-		soundfontUrl: "./soundfont_guitar/",
+		soundfontUrl: "./examples/draw/soundfont_guitar/",
 		instrument: "acoustic_guitar_steel",
 		onprogress: function(state, progress) {
 			console.log(state, progress);
