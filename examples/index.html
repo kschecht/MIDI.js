@@ -8,6 +8,7 @@
       <!-- visual display -->
       <div class="flex-container-horiz">
         <div class="flex-container-vert">
+
           <canvas id="strum0" onclick="DRAWGUITAR.onStrum(0)" width="1" height="1"></canvas>
           <canvas id="strum1" onclick="DRAWGUITAR.onStrum(1)" width="1" height="1"></canvas>
           <canvas id="strum2" onclick="DRAWGUITAR.onStrum(2)" width="1" height="1"></canvas>
@@ -15,7 +16,8 @@
           <canvas id="strum4" onclick="DRAWGUITAR.onStrum(4)" width="1" height="1"></canvas>
           <canvas id="strum5" onclick="DRAWGUITAR.onStrum(5)" width="1" height="1"></canvas>
         </div>
-		    <div class="flex-container-vert" style="margin-left: 60px;">
+        <div class="flex-container-vert" style="margin-left: 60px;">
+          <button id="start" onclick="start()" width="500" height="500">Start</button>
 			    <div style="font: italic  bold 18px Arial;margin-left: 15px">
 				    You are playing:
 			    </div>
@@ -53,16 +55,17 @@
       <script src="/socket.io/socket.io.js"></script> -->
 
         <script>
-          DRAWGUITAR.drawFretboard();
+          
+            DRAWGUITAR.drawFretboard();
           DRAWGUITAR.drawStrummer();
+          function start() {
           //intialize to 0 value arrays
           window.previousFretInput = [0,0,0,0,0,0];
           window.previousStringInput = [0,0,0,0,0,0];
            //var socket = io.connect("http://localhost:4000"); //connect to server // ARDUINO
           //  console.log("hi");
             //socket.on('emit_serial_data', function(data) { //As a temp data is received // ARDUINO
-          const input = ['{ "frets":[0,0,0,0,0,1], "strummed":[0,0,0,0,0,0] }',
-                          '{ "frets":[0,0,0,0,1,1], "strummed":[0,0,0,0,0,0] }'];
+          const input = ['{ "frets":[0,2,2,0,0,0], "strummed":[0,1,0,1,0,0] }'];
           for (var i = 0; i < input.length; i++) {
 
               var parsedData = JSON.parse(input[i]);
@@ -93,6 +96,8 @@
               window.previousStringInput = strummedInputArray;
           }
          //}); //ARDUINO
+
+          }
 
         </script>
     </head>

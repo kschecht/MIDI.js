@@ -148,7 +148,7 @@ root.drawStrummer = function () {
     ctx.stroke();
 };
 
-root.drawRectangle = function (strumString) {
+function drawRectangle(strumString) {
     var strumStartX = 10;
 	var strumStartY = 40;
 	var strummerIndX = 55;
@@ -271,6 +271,7 @@ function createUUID() {
  }
 
  root.onStrum = function(strumString) {
+
     MIDI.loadPlugin({
 		soundfontUrl: "./soundfont_guitar/",
 		instrument: "acoustic_guitar_steel",
@@ -284,59 +285,52 @@ function createUUID() {
             MIDI.setVolume(0, 300);
 
             var fret = getFret(strumString);
-            var midiNote = midiNotes[fret][strumString]; // the MIDI note
+            var midiNote = midiNotes[fret][strumString][0]; // the MIDI note
 
             if (strums[strumString][0] != -1) {
-                MIDI.noteOff(0, strums[strumString][0], 0);
+                //MIDI.noteOff(0, strums[strumString][0], 0);
             }
             MIDI.noteOn(0, midiNote, velocity, delay);
-            // addStrumVisual();
+            drawRectangle(strumString);
             var currentStrum = createUUID();
             strums[strumString][1] = currentStrum;
-            // setTimeout(function(){
+            setTimeout(function(){
             //     if (strums[strumString][1] == currentStrum) {
-                    MIDI.noteOff(0, midiNote, delay + 2);
+                    //MIDI.noteOff(0, midiNote, delay);
                     strums[strumString][1] = "";
                     strums[strumString][0] = -1;
-                    // removeStrumVisual(string1);
+                    //removeRectangle(strumString);
             //     }
-            // },longestNoteLength);
+            },longestNoteLength);
         }
     });
 };
 
 root.onPressFret = function(fret, neckString) {
-	if (fret == 0) {
-		onReleaseFret(neckString);
-	} else {
-		var currentFret = getFret(neckString);
-		if (currentFret != fret && currentFret != 0) {
-			// removePressVisual(string1);
-			frets[currentFret][neckString] = false;
-		}
 		
-		frets[fret][neckString] = true;
-		if (strums[neckString][0] != -1) {
-			// MIDI.noteOff(0, strums[neckString][0], 0);
-			strums[neckString][0] = -1;
-			strums[neckString][1] = "";
-			// removeStrumVisual(string1);
-		}
-		changeChord();
-	}
+    frets[fret-1][neckString] = true;
+    if (strums[neckString][0] != -1) {
+        // MIDI.noteOff(0, strums[neckString][0], 0);
+        strums[neckString][0] = -1;
+        strums[neckString][1] = "";
+        // removeStrumVisual(string1);
+    }
+    changeChord();
 };
 
 root.onReleaseFret = function(neckString) {
     // removePressVisual(neckString);
     var currentFret = getFret(neckString);
-    frets[currentFret][neckString] = 0;
-    if (strums[neckString][0] != -1) {
-        // MIDI.noteOff(0, strums[neckString][0], 0);
-        strums[neckString][0] = -1;
-        strums[neckString][1] = "";
-        //removeStrumVisual();
+    if (currentFret != 0) {
+        frets[currentFret-1][neckString] = false;
+        if (strums[neckString][0] != -1) {
+            // MIDI.noteOff(0, strums[neckString][0], 0);
+            strums[neckString][0] = -1;
+            strums[neckString][1] = "";
+            //removeStrumVisual();
+        }
+        changeChord();
     }
-	changeChord();
 };
 
 function changeChord() {
@@ -368,6 +362,7 @@ function changeChord() {
 				string4 == 0 &&
 				string5 == 0) {
         correctChordFlag=true;
+        showChord('Em');
 	} else if (string0 == 0 && 
 				string1 == 0 && 
 				string2 == 0 && 
@@ -387,7 +382,7 @@ function changeChord() {
 // >>>>>>> origin/mikefra
 // }
 
-root.showChord=function(chordName)
+function showChord(chordName)
 {
     
     // Clear fretBoard
