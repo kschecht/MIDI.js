@@ -26,7 +26,7 @@ app.get('/', function(req, res) {
 //get serial port data
 const SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
-const serialPort = new SerialPort('COM5', { baudRate: 9600 });
+const serialPort = new SerialPort('COM4', { baudRate: 9600 });
 const parser = serialPort.pipe(new Readline({ delimiter: '\n' }));
 // Read the port data
 serialPort.on("open", () => {

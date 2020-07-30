@@ -242,42 +242,38 @@ function createUUID() {
     });
  }
 
- root.onStrum = function(strumString) {
-
-    MIDI.loadPlugin({
-		soundfontUrl: "./soundfont_guitar/",
-		instrument: "acoustic_guitar_steel",
-		onprogress: function(state, progress) {
-			console.log(state, progress);
-		},
-		onsuccess: function() {
-            var delay = 0;
-            var velocity = 127; // how hard the note hits
-            MIDI.programChange(0, MIDI.GM.byName["acoustic_guitar_steel"].number); // select correct instrument
-            MIDI.setVolume(0, 300);
-
-            var fret = getFret(strumString);
-            var midiNote = midiNotes[fret][strumString][0]; // the MIDI note
-
-            if (strums[strumString][0] != -1) {
-                //MIDI.noteOff(0, strums[strumString][0], 0);
-            }
-            MIDI.noteOn(0, midiNote, velocity, delay);
-            var currentStrum = createUUID();
-            strums[strumString][1] = currentStrum;
+ root.loadMidiPlugin = function () {
+        MIDI.loadPlugin({
+            soundfontUrl: './examples/soundfont_guitar/',
+            instrument: 'acoustic_guitar_steel',
+            onprogress: function (state, progress) {
+                console.log(state, progress);
+            },
+            onsuccess: function () {
+                MIDI.programChange(
+                    0,
+                    MIDI.GM.byName['acoustic_guitar_steel'].number
+                );
+                MIDI.setVolume(0, 300);
+            },
+        });
+    };
+    root.onStrum = function (strumString) {
+        var delay = 0;
+        var velocity = 127; // how hard the note hits
+        var fret = getFret(strumString);
+        var midiNote = midiNotes[fret][strumString][0]; // the MIDI note
+        MIDI.noteOn(0, midiNote, velocity, delay);
+      //  drawRectangle(strumString);
+        var currentStrum = createUUID();
+        strums[strumString][1] = currentStrum;
+        updateStrummer();
+        setTimeout(function () {
+            strums[strumString][1] = '';
+            strums[strumString][0] = -1;
             updateStrummer();
-            setTimeout(function(){
-            //     if (strums[strumString][1] == currentStrum) {
-                    //MIDI.noteOff(0, midiNote, delay);
-                    strums[strumString][1] = "";
-                    strums[strumString][0] = -1;
-                    updateStrummer();
-            //     }
-            },longestNoteLength);
-        }
-    });
-
-};
+        }, longestNoteLength);
+    };
 
 root.onPressFret = function(fret, neckString) {
     if (fret != 0)
