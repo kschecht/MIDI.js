@@ -65,15 +65,21 @@
            //var socket = io.connect("http://localhost:4000"); //connect to server // ARDUINO
           //  console.log("hi");
             //socket.on('emit_serial_data', function(data) { //As a temp data is received // ARDUINO
-          const input = ['{ "frets":[0,2,2,0,0,0], "strummed":[0,1,0,1,0,0] }'];
-          for (var i = 0; i < input.length; i++) {
+          const input = [
+            // '{ "frets":[0,2,2,0,0,0], "strummed":[0,1,0,1,0,0] }',
+             '{ "frets":[3,2,0,0,0,3], "strummed":[1,1,1,1,1,1] }',
+            // '{ "frets":[0,2,2,0,0,0], "strummed":[0,1,1,1,1,1] }',
+            //  '{ "frets":[1,1,0,0,0,0], "strummed":[0,0,0,0,0,1] }'
 
-              var parsedData = JSON.parse(input[i]);
+          ];
+          for (var j = 0; j < input.length; j++) {
+
+              var parsedData = JSON.parse(input[j]);
               var fretInputArray = parsedData.frets;
               var strummedInputArray = parsedData.strummed;
 
             //On Strum input
-            for (i = 0; i < strummedInputArray.length; i++) {
+            for (var i = 0; i < strummedInputArray.length; i++) {
               if(strummedInputArray[i])
               {
                 document.querySelector('#strum'+i).click(); 
@@ -81,24 +87,24 @@
              }
 
              // on press fret
-             for (i = 0; i < strummedInputArray.length; i++) {
-              if(window.previousFretInput[i] != fretInputArray[i])
+             for (var k = 0; k < strummedInputArray.length; k++) {
+              if(window.previousFretInput[k] != fretInputArray[k])
                 {
                   //clear the fret position
-                  DRAWGUITAR.onReleaseFret(i);
+                  DRAWGUITAR.onReleaseFret(k);
                   //press new fret position
-                  DRAWGUITAR.onPressFret(fretInputArray[i], i)
+                  DRAWGUITAR.onPressFret(fretInputArray[k], k)
                 }
               }
 
               //set current state to old state
               window.previousFretInput = fretInputArray;
               window.previousStringInput = strummedInputArray;
+
           }
          //}); //ARDUINO
 
           }
-
         </script>
     </head>
     <body>
