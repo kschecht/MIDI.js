@@ -14,9 +14,9 @@ var path = require("path");
    })
 
    // viewed at http://localhost:8080
-  app.get('/', function(req, res) {
-      res.sendFile(path.join(__dirname + '/index.html'));
-  });
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'));
+});
 
    var io = require('socket.io')(server); //Bind socket.io to our express server.
 

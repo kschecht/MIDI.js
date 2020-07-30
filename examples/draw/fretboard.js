@@ -1,14 +1,3 @@
-// import "../js/midi/audioDetect.js";
-// import "../js/midi/loader.js"
-// import "../js/midi/plugin.audiotag.js"
-// import "../js/midi/plugin.webaudio.js"
-// import "../js/midi/plugin.webmidi.js"
-
-// TODO:
-// redraw previous frets after correct chord reached
-// erase circle
-// erase triangle
-
 if (typeof DRAWGUITAR === 'undefined') DRAWGUITAR = {};
 
 const scale=2;
@@ -172,24 +161,24 @@ function removeRectangle(strumString) {
     root.drawStrummer();
 }
 
-// root.drawCircle = function (row, col) {
-//     var c = document.getElementById("fretBoard");
-//     var ctx = c.getContext("2d");
-//     ctx.beginPath();
-//     row = row + 1;
-//     var x = (xStart*scale) + ((col * fretWidth) * scale);
-//     var y = (yFretStart * scale) + (row * (fretHeight *scale)) - ((fretHeight*scale)/2)
-//     ctx.arc(x, y ,circleRadius,0,2*Math.PI);
-//     ctx.fillStyle= correctFillColor;
-//     ctx.fill();
-// };
+root.drawCircle = function (row, col) {
+    var c = document.getElementById("fretBoard");
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    row = row + 1;
+    var x = (xStart*scale) + ((col * fretWidth) * scale);
+    var y = (yFretStart * scale) + (row * (fretHeight *scale)) - ((fretHeight*scale)/2)
+    ctx.arc(x, y ,circleRadius,0,2*Math.PI);
+    ctx.fillStyle= correctFillColor;
+    ctx.fill();
+};
 
-function removeCircle(row, col) {
-    var c = document.getElementById("strummer");
-    const context = c.getContext('2d');
-    context.clearRect(strumStartX + (strummerIndX * strumString), strumStartY, strummerIndWidth, strummerIndHeigtht);
-    root.drawStrummer();
-}
+// function removeCircle(row, col) {
+//     var c = document.getElementById("strummer");
+//     const context = c.getContext('2d');
+//     context.clearRect(strumStartX + (strummerIndX * strumString), strumStartY, strummerIndWidth, strummerIndHeigtht);
+//     root.drawStrummer();
+// }
 
 root.drawTriangle = function (row, col) {
     var c = document.getElementById("fretBoard");
@@ -241,14 +230,10 @@ var frets = [
 //   5	1	65	41
 //   5	2	66	42
 
-
-// var frets = [0,2,2,0,3,0]
-
 var strums = [
     // [midi ID (int), unique strum ID (string)]
     [-1, ""], [-1, ""], [-1, ""], [-1, ""], [-1, ""], [-1, ""]
 ];
-
 
 function getFret(guitarString) {
     if (frets[0][guitarString]) {
@@ -272,89 +257,49 @@ function createUUID() {
 
  root.onStrum = function(strumString) {
 
-     MIDI.loadPlugin({
- 		soundfontUrl: "./examples/soundfont_guitar/",
- 		instrument: "acoustic_guitar_steel",
- 		onprogress: function(state, progress) {
- 			console.log(state, progress);
- 		},
- 		onsuccess: function() {
-             var delay = 0;
-             var velocity = 127; // how hard the note hits
-             MIDI.programChange(0, MIDI.GM.byName["acoustic_guitar_steel"].number); // select correct instrument
-             MIDI.setVolume(0, 300);
+    MIDI.loadPlugin({
+		soundfontUrl: "./soundfont_guitar/",
+		instrument: "acoustic_guitar_steel",
+		onprogress: function(state, progress) {
+			console.log(state, progress);
+		},
+		onsuccess: function() {
+            var delay = 0;
+            var velocity = 127; // how hard the note hits
+            MIDI.programChange(0, MIDI.GM.byName["acoustic_guitar_steel"].number); // select correct instrument
+            MIDI.setVolume(0, 300);
 
-             var fret = getFret(strumString);
-             var midiNote = midiNotes[fret][strumString][0]; // the MIDI note 0 -> reverse
+            var fret = getFret(strumString);
+            var midiNote = midiNotes[fret][strumString][0]; // the MIDI note
 
-             if (strums[strumString][0] != -1) {
-                 //MIDI.noteOff(0, strums[strumString][0], 0);
-             }
-             MIDI.noteOn(0, midiNote, velocity, delay);
-             drawRectangle(strumString);
-             var currentStrum = createUUID();
-             strums[strumString][1] = currentStrum;
-             setTimeout(function(){
-             //     if (strums[strumString][1] == currentStrum) {
-                  //   MIDI.noteOff(0, midiNote, delay);
-                     strums[strumString][1] = "";
-                     strums[strumString][0] = -1;
-                     //removeRectangle(strumString);
-             //     }
-             },longestNoteLength);
-         }
-     });
- };
-
-
-//  root.onStrum = function(strumString) {
-//     MIDI.loadPlugin({
-// 		soundfontUrl: "./soundfont_guitar/",
-// 		instrument: "acoustic_guitar_steel",
-// 		onprogress: function(state, progress) {
-// 			console.log(state, progress);
-// 		},
-// 		onsuccess: function() {
-//             var delay = 0;
-//             var velocity = 127; // how hard the note hits
-//             MIDI.programChange(0, MIDI.GM.byName["acoustic_guitar_steel"].number); // select correct instrument
-//             MIDI.setVolume(0, 300);
-//
-//             var fret = getFret(strumString);
-//             var midiNote = midiNotes[fret][strumString]; // the MIDI note
-//
-//             if (strums[strumString][0] != -1) {
-//                 MIDI.noteOff(0, strums[strumString][0], 0);
-//             }
-//             MIDI.noteOn(0, midiNote, velocity, delay);
-//             // addStrumVisual();
-//             var currentStrum = createUUID();
-//             strums[strumString][1] = currentStrum;
-//             // setTimeout(function(){
-//             //     if (strums[strumString][1] == currentStrum) {
-//                     MIDI.noteOff(0, midiNote, delay + 2);
-//                     strums[strumString][1] = "";
-//                     strums[strumString][0] = -1;
-//                     // removeStrumVisual(string1);
-//             //     }
-//             // },longestNoteLength);
-//         }
-//     });
-// };
+            if (strums[strumString][0] != -1) {
+                //MIDI.noteOff(0, strums[strumString][0], 0);
+            }
+            MIDI.noteOn(0, midiNote, velocity, delay);
+            drawRectangle(strumString);
+            var currentStrum = createUUID();
+            strums[strumString][1] = currentStrum;
+            setTimeout(function(){
+            //     if (strums[strumString][1] == currentStrum) {
+                    //MIDI.noteOff(0, midiNote, delay);
+                    strums[strumString][1] = "";
+                    strums[strumString][0] = -1;
+                    //removeRectangle(strumString);
+            //     }
+            },longestNoteLength);
+        }
+    });
+};
 
 root.onPressFret = function(fret, neckString) {
-
-  if(fret != 0){
-		frets[fret-1][neckString] = true;
-		if (strums[neckString][0] != -1) {
-			MIDI.noteOff(0, strums[neckString][0], 0);
-			strums[neckString][0] = -1;
-			strums[neckString][1] = "";
-			// removeStrumVisual(string1);
-		}
-		changeChord();
-  }
-	//}
+    frets[fret-1][neckString] = true;
+    if (strums[neckString][0] != -1) {
+        // MIDI.noteOff(0, strums[neckString][0], 0);
+        strums[neckString][0] = -1;
+        strums[neckString][1] = "";
+        // removeStrumVisual(string1);
+    }
+    changeChord();
 };
 
 root.onReleaseFret = function(neckString) {
@@ -384,16 +329,18 @@ function changeChord() {
 		string1 == 2 &&
 		string2 == 0 &&
 		string3 == 0 &&
-		(string4 == 0 || string4 == 1) &&
+		string4 == 0 &&
 		string5 == 1) {
         correctChordFlag=true;
+        updateChordIndicator('G');
 	} else if ((string0 == 0 || string0 == 3) &&
 				string1 == 3 &&
 				string2 == 2 &&
 				string3 == 0 &&
 				string4 == 1 &&
-				(string5 == 0 || string5 == 3)) {
+				string5 == 3) {
         correctChordFlag=true;
+        updateChordIndicator('C');
 	} else if (string0 == 0 &&
 				string1 == 2 &&
 				string2 == 2 &&
@@ -401,6 +348,7 @@ function changeChord() {
 				string4 == 0 &&
 				string5 == 0) {
         correctChordFlag=true;
+        updateChordIndicator('Em');
 	} else if (string0 == 0 &&
 				string1 == 0 &&
 				string2 == 0 &&
@@ -408,108 +356,14 @@ function changeChord() {
 				string4 == 3 &&
 				string5 == 2) {
         correctChordFlag=true;
+        updateChordIndicator('D');
     }
+    var c = document.getElementById("fretBoard");
+    const context = c.getContext('2d');
+    context.clearRect(0, 0, c.width, c.height);
+    root.drawFretboard();
+    updateChordIndicator('?');
     drawChord(frets, correctChordFlag);
-}
-
-//       var notesToPlay = [];
-
-// function updateNotesToPlay(row, col) {
-//     var note = midiNotes[row][col][1]
-//     notesToPlay.push(note);
-// >>>>>>> origin/mikefra
-// }
-
-root.showChord=function(chordName)
-{
-
-    // Clear fretBoard
-     frets[0].fill(false);
-     frets[1].fill(false);
-     frets[2].fill(false);
-     var c = document.getElementById("fretBoard");
-     const context = c.getContext('2d');
-     context.clearRect(0, 0, c.width, c.height);
-     root.drawFretboard();
-
-     correctChordFlag=false;
-
-     switch (chordName) {
-        case 'D7':
-        // D7 Chord
-        frets[1][5]=true;
-        frets[1][3]=true;
-        frets[0][4]=true;
-        correctChordFlag=true;
-        break;
-        case 'D':
-        // D Chord
-        frets[1][5]=true;
-        frets[1][3]=true;
-        frets[2][4]=true;
-        correctChordFlag=true;
-        break;
-        case 'Em':
-        // Em Chord
-        frets[1][1]=true; // midi id 41
-        frets[1][2]=true; // midi id 47
-        correctChordFlag=true;
-        break;
-        case 'C':
-        // C Chord
-        frets[0][4]=true;
-        frets[1][2]=true;
-        frets[2][1]=true;
-        correctChordFlag=true;
-        playSound(48);
-        playSound(52);
-        playSound(55);
-        playSound(60);
-        playSound(64);
-        break;
-        case 'G':
-        // G Chord
-        frets[1][1]=true;
-        frets[2][0]=true;
-        frets[2][5]=true;
-        correctChordFlag=true;
-        break;
-        case '?':
-        // ? Chord - wrong chord
-        frets[1][0]=true;
-        frets[2][4]=true;
-        frets[2][5]=true;
-        break;
-
-    }
-    drawChord(frets, correctChordFlag);
-    updateChordIndicator(chordName)
-}
-
-
-function playSound(note1) {
-    MIDI.loadPlugin({
-    soundfontUrl: "./soundfont_guitar/",
-    instrument: "acoustic_guitar_steel",
-    onprogress: function(state, progress) {
-        console.log(state, progress);
-    },
-    onsuccess: function() {
-        var delay = 0; // play one note every quarter second
-        // var note1 = 41; // the MIDI note
-        var velocity = 127; // how hard the note hits
-        // play the note
-        MIDI.programChange(0, MIDI.GM.byName["acoustic_guitar_steel"].number); // select correct instrument
-        MIDI.setVolume(0, 300);
-        MIDI.noteOn(0, note1, velocity, delay);
-        MIDI.noteOff(0, note1, delay + 0.75);
-
-        // var note2 = 52; // the MIDI note
-        // MIDI.noteOn(0, note2, velocity, delay);
-        // MIDI.noteOff(0, note2, delay + 0.75);
-
-    }
-});
 }
 
 function updateChordIndicator(chordName)
