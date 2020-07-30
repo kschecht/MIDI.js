@@ -263,19 +263,20 @@ function createUUID() {
                 //MIDI.noteOff(0, strums[strumString][0], 0);
             }
             MIDI.noteOn(0, midiNote, velocity, delay);
-            drawRectangle(strumString);
             var currentStrum = createUUID();
             strums[strumString][1] = currentStrum;
+            updateStrummer();
             setTimeout(function(){
             //     if (strums[strumString][1] == currentStrum) {
                     //MIDI.noteOff(0, midiNote, delay);
                     strums[strumString][1] = "";
                     strums[strumString][0] = -1;
-                    //removeRectangle(strumString);
+                    updateStrummer();
             //     }
             },longestNoteLength);
         }
     });
+
 };
 
 root.onPressFret = function(fret, neckString) {
@@ -285,14 +286,13 @@ root.onPressFret = function(fret, neckString) {
         // MIDI.noteOff(0, strums[neckString][0], 0);
         strums[neckString][0] = -1;
         strums[neckString][1] = "";
-        removeStrumVisual(neckString);
+        updateStrummer();
     }
     changeChord();
+   
 };
 
 root.onReleaseFret = function(neckString) {
-    // removePressVisual(neckString);
-    
     var currentFret = getFret(neckString);
     if (currentFret != 0) {
         frets[currentFret-1][neckString] = false;
@@ -300,7 +300,7 @@ root.onReleaseFret = function(neckString) {
             // MIDI.noteOff(0, strums[neckString][0], 0);
             strums[neckString][0] = -1;
             strums[neckString][1] = "";
-            //removeStrumVisual();
+            updateStrummer();
         }
         changeChord();
     }
@@ -401,6 +401,16 @@ function drawChord(frets, correctChordFlag) {
     }
 }
 
-
+function updateStrummer() {
+    root.drawStrummer();
+    var col=0;
+    for (col=0;col<6;col++)
+    {
+        if (strums[col][1] != "")
+        {
+            drawRectangle(col);
+        }
+    }
+}
 
 })(DRAWGUITAR);
