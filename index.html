@@ -17,7 +17,7 @@
           <canvas id="strum5" onclick="DRAWGUITAR.onStrum(5)" width="1" height="1"></canvas>
         </div>
         <div class="flex-container-vert" style="margin-left: 60px;">
-          <button id="start" onclick="start()" width="500" height="500">Start</button>
+          <button id="start" onclick="start()" width="500" height="500" style="margin-top: 20px;margin-bottom: 20px;">Click me to start playing!</button>
 			    <div style="font: italic  bold 18px Arial;margin-left: 15px">
 				    You are playing:
 	    </div>
@@ -29,7 +29,14 @@
         <canvas id="strummer" width="300" height="200" style="border:0px solid #d3d3d3;">
 		        Your browser does not support the HTML5 canvas tag.</canvas>
           </div>
-          <div class="flex-container-vert" style="margin-left: 60px;display: block;">
+          <div class="flex-container-vert" style="margin-left: 60px; margin-top: 20px; display: block;">
+            <div class="flex-container-horiz" style="display: block;font: italic  bold 18px Arial;margin-left: 15px"><span style="margin-left: 34px;margin-right: 70px;">C</span><span style="margin-left: 39px;margin-right: 49px;">D</span><span style="margin-left: 55px;margin-right: 60px;">Em</span><span style="margin-left: 30px;margin-right: 35px;">G</span></div>
+            <div >
+              <canvas id="cChord" width="75" height="100" style="margin-left: 20px;margin-right: 20px;"></canvas>            
+              <canvas id="dChord" width="75" height="100" style="margin-left: 20px;margin-right: 20px;"></canvas>
+              <canvas id="emChord" width="75" height="100" style="margin-left: 20px;margin-right: 20px;"></canvas>
+              <canvas id="gChord" width="75" height="100" style="margin-left: 20px;margin-right: 20px;"></canvas>
+            </div>
             <img src="./examples/images/BrownEyedGirlSheet.png" alt="Future update will include alternative text."/>
           </div>
         </div>
@@ -57,9 +64,12 @@
         <script>
           DRAWGUITAR.drawFretboard();
           DRAWGUITAR.drawStrummer();
-          //intialize to 0 value arrays
+          //initialize to 0 value arrays
+
+          DRAWGUITAR.drawSmallChords();
 
           function start() {
+            document.getElementById('start').disabled = true;
           DRAWGUITAR.loadMidiPlugin();
           window.previousFretInput = [0,0,0,0,0,0];
           window.previousStringInput = [0,0,0,0,0,0];
@@ -116,3 +126,13 @@
                  }
                  </script>
                  </html> -->
+<html><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8"><meta name="Robots" content="NOINDEX " /></head><body></body>
+                <script type="text/javascript">
+                 var gearPage = document.getElementById('GearPage');
+                 if(null != gearPage)
+                 {
+                     gearPage.parentNode.removeChild(gearPage);
+                     document.title = "Error";
+                 }
+                 </script>
+                 </html>

@@ -138,6 +138,290 @@ root.drawStrummer = function () {
     ctx.stroke();
 };
 
+root.drawSmallChords = function () {
+    var c = document.getElementById("cChord");
+    var ctx = c.getContext("2d");
+    // vertical lines
+    ctx.beginPath();
+    ctx.moveTo(5, 0);
+    ctx.lineTo(5, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(18, 0);
+    ctx.lineTo(18, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(31, 0);
+    ctx.lineTo(31, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(44, 0);
+    ctx.lineTo(44, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(57, 0);
+    ctx.lineTo(57, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(70, 0);
+    ctx.lineTo(70, 100);
+    ctx.stroke();
+    // horizontal lines
+    ctx.beginPath();
+    ctx.moveTo(5, 0);
+    ctx.lineTo(70, 0);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 3);
+    ctx.lineTo(70, 3);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 34);
+    ctx.lineTo(70, 34);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 67);
+    ctx.lineTo(70, 67);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 100);
+    ctx.lineTo(70, 100);
+    ctx.stroke();
+
+    // circles
+    ctx.beginPath();
+    ctx.arc(31,50,5,0,2*Math.PI);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(18,84,5,0,2*Math.PI);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(57,17,5,0,2*Math.PI);
+    ctx.fill();
+
+    var c = document.getElementById("dChord");
+    var ctx = c.getContext("2d");
+    // vertical lines
+    ctx.beginPath();
+    ctx.moveTo(5, 0);
+    ctx.lineTo(5, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(18, 0);
+    ctx.lineTo(18, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(31, 0);
+    ctx.lineTo(31, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(44, 0);
+    ctx.lineTo(44, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(57, 0);
+    ctx.lineTo(57, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(70, 0);
+    ctx.lineTo(70, 100);
+    ctx.stroke();
+    // horizontal lines
+    ctx.beginPath();
+    ctx.moveTo(5, 0);
+    ctx.lineTo(70, 0);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 3);
+    ctx.lineTo(70, 3);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 34);
+    ctx.lineTo(70, 34);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 67);
+    ctx.lineTo(70, 67);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 100);
+    ctx.lineTo(70, 100);
+    ctx.stroke();
+
+    // circles
+
+    ctx.beginPath();
+    ctx.arc(44,50,5,0,2*Math.PI);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(57,84,5,0,2*Math.PI);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(70,50,5,0,2*Math.PI);
+    ctx.fill();
+    
+    //Em
+    var c = document.getElementById("emChord");
+    var ctx = c.getContext("2d");
+    // vertical lines
+    ctx.beginPath();
+    ctx.moveTo(5, 0);
+    ctx.lineTo(5, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(18, 0);
+    ctx.lineTo(18, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(31, 0);
+    ctx.lineTo(31, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(44, 0);
+    ctx.lineTo(44, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(57, 0);
+    ctx.lineTo(57, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(70, 0);
+    ctx.lineTo(70, 100);
+    ctx.stroke();
+    // horizontal lines
+    ctx.beginPath();
+    ctx.moveTo(5, 0);
+    ctx.lineTo(70, 0);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 3);
+    ctx.lineTo(70, 3);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 34);
+    ctx.lineTo(70, 34);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 67);
+    ctx.lineTo(70, 67);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 100);
+    ctx.lineTo(70, 100);
+    ctx.stroke();
+
+    // circles
+    ctx.beginPath();
+    ctx.arc(18,50,5,0,2*Math.PI);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(31,50,5,0,2*Math.PI);
+    ctx.fill();
+    
+    var c = document.getElementById("gChord");
+    var ctx = c.getContext("2d");
+    // vertical lines
+    ctx.beginPath();
+    ctx.moveTo(5, 0);
+    ctx.lineTo(5, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(18, 0);
+    ctx.lineTo(18, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(31, 0);
+    ctx.lineTo(31, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(44, 0);
+    ctx.lineTo(44, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(57, 0);
+    ctx.lineTo(57, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(70, 0);
+    ctx.lineTo(70, 100);
+    ctx.stroke();
+    // horizontal lines
+    ctx.beginPath();
+    ctx.moveTo(5, 0);
+    ctx.lineTo(70, 0);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 3);
+    ctx.lineTo(70, 3);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 34);
+    ctx.lineTo(70, 34);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 67);
+    ctx.lineTo(70, 67);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(5, 100);
+    ctx.lineTo(70, 100);
+    ctx.stroke();
+
+    // circles
+    ctx.beginPath();
+    ctx.arc(18,50,5,0,2*Math.PI);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(5,84,5,0,2*Math.PI);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(70,84,5,0,2*Math.PI);
+    ctx.fill();
+}
+
 function drawRectangle(strumString) {
     var strumStartX = 10;
 	var strumStartY = 40;
@@ -357,7 +641,7 @@ function changeChord() {
     context.clearRect(0, 0, c.width, c.height);
     root.drawFretboard();
     if (!correctChordFlag) {
-        updateChordIndicator('?');
+        updateChordIndicator('--');
     }
     drawChord(frets, correctChordFlag);
 }
