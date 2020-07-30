@@ -20,16 +20,6 @@
 	<canvas id="myCanvas" width="300" height="200" style="border:0px solid #d3d3d3;">
 		Your browser does not support the HTML5 canvas tag.</canvas>
 
-		<script src="/socket.io/socket.io.js"></script>
-		<script>
-			var socket = io.connect('/');
-      socket.on('emit_serial_data', function (data) {
-        console.log(data);
-        alert('got a message!');
-      });
-		</script>
-
-
 	<script>
 		var c = document.getElementById("myCanvas");
 		var ctx = c.getContext("2d");
@@ -96,7 +86,6 @@
 // var notes = [{midiId: }];
 
 function play() {
-
 	MIDI.loadPlugin({
 		soundfontUrl: "./soundfont_guitar/",
 		instrument: "acoustic_guitar_steel",
@@ -104,16 +93,6 @@ function play() {
 			console.log(state, progress);
 		},
 		onsuccess: function() {
-			if (navigator.requestMIDIAccess) {
-    		console.log('This browser supports WebMIDI!');
-			} else {
-			    console.log('WebMIDI is not supported in this browser.');
-			}
-
-			navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
-
-
-
 			var delay = 0; // play one note every quarter second
 			var note1 = 50; // the MIDI note
 			var velocity = 127; // how hard the note hits
@@ -132,53 +111,10 @@ function play() {
 			ctx.beginPath();
 			ctx.arc(70,130,10,0,2*Math.PI);
 			ctx.fill();
-
-			var c = document.getElementById("myCanvas");
-			var ctx = c.getContext("2d");
-			ctx.beginPath();
-			ctx.arc(170,130,10,0,2*Math.PI);
-			ctx.fill();
 		}
 	});
 };
 
-
-		function onMIDISuccess(midiAccess) {
-			    console.log(midiAccess);
-					console.log('Could access your MIDI devices.');
-
-			   // var inputs = midiAccess.inputs;
-			    var outputs = midiAccess.outputs;
-
-					for (var input of midiAccess.inputs.values())
-						 input.onmidimessage = getMIDIMessage;
-				 }
-
-
-			function onMIDIFailure() {
-			    console.log('Could not access your MIDI devices.');
-			}
-
-			function getMIDIMessage(midiMessage) {
-			    console.log(midiMessage);
-					var command = message.data[0];
-					 var note = message.data[1];
-					 var velocity = (message.data.length > 2) ? message.data[2] : 0; // a velocity value might not be included with a noteOff command
-
-					 switch (command) {
-							 case 144: // noteOn
-									 if (velocity > 0) {
-											 noteOn(note, velocity);
-									 } else {
-											 noteOff(note);
-									 }
-									 break;
-							 case 128: // noteOff
-									 noteOff(note);
-									 break;
-							 // we could easily expand this switch statement to cover other types of commands such as controllers or sysex
-					 }
-			}
 
 </script>
 </body>

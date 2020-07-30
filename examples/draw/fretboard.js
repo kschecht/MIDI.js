@@ -90,6 +90,7 @@ root.drawFretboard = function () {
 root.drawStrummer = function () {
     var c = document.getElementById("strummer");
     var ctx = c.getContext("2d");
+    ctx.clearRect(0,0, c.width, c.height);
     // vertical lines
     // var xStart=10
     // var yStart=35
@@ -154,13 +155,6 @@ function drawRectangle(strumString) {
 
 };
 
-function removeRectangle(strumString) {
-    var c = document.getElementById("strummer");
-    const context = c.getContext('2d');
-    context.clearRect(strumStartX + (strummerIndX * strumString), strumStartY, strummerIndWidth, strummerIndHeigtht);
-    root.drawStrummer();
-}
-
 root.drawCircle = function (row, col) {
     var c = document.getElementById("fretBoard");
     var ctx = c.getContext("2d");
@@ -172,13 +166,6 @@ root.drawCircle = function (row, col) {
     ctx.fillStyle= correctFillColor;
     ctx.fill();
 };
-
-// function removeCircle(row, col) {
-//     var c = document.getElementById("strummer");
-//     const context = c.getContext('2d');
-//     context.clearRect(strumStartX + (strummerIndX * strumString), strumStartY, strummerIndWidth, strummerIndHeigtht);
-//     root.drawStrummer();
-// }
 
 root.drawTriangle = function (row, col) {
     var c = document.getElementById("fretBoard");
@@ -292,18 +279,20 @@ function createUUID() {
 };
 
 root.onPressFret = function(fret, neckString) {
-    frets[fret-1][neckString] = true;
+    if (fret != 0)
+        frets[fret-1][neckString] = true;
     if (strums[neckString][0] != -1) {
         // MIDI.noteOff(0, strums[neckString][0], 0);
         strums[neckString][0] = -1;
         strums[neckString][1] = "";
-        // removeStrumVisual(string1);
+        removeStrumVisual(neckString);
     }
     changeChord();
 };
 
 root.onReleaseFret = function(neckString) {
     // removePressVisual(neckString);
+
     var currentFret = getFret(neckString);
     if (currentFret != 0) {
         frets[currentFret-1][neckString] = false;
@@ -330,7 +319,7 @@ function changeChord() {
 		string2 == 0 &&
 		string3 == 0 &&
 		string4 == 0 &&
-		string5 == 1) {
+		string5 == 3) {
         correctChordFlag=true;
         updateChordIndicator('G');
 	} else if ((string0 == 0 || string0 == 3) &&
@@ -338,7 +327,7 @@ function changeChord() {
 				string2 == 2 &&
 				string3 == 0 &&
 				string4 == 1 &&
-				string5 == 3) {
+				string5 == 0) {
         correctChordFlag=true;
         updateChordIndicator('C');
 	} else if (string0 == 0 &&
@@ -357,12 +346,23 @@ function changeChord() {
 				string5 == 2) {
         correctChordFlag=true;
         updateChordIndicator('D');
-    }
+    } else if (string0 == 0 &&
+        string1 == 0 &&
+        string2 == 0 &&
+        string3 == 2 &&
+        string4 == 1 &&
+        string5 == 2) {
+        correctChordFlag=true;
+        updateChordIndicator('D7');
+        }
+
     var c = document.getElementById("fretBoard");
     const context = c.getContext('2d');
     context.clearRect(0, 0, c.width, c.height);
     root.drawFretboard();
-    updateChordIndicator('?');
+    if (!correctChordFlag) {
+        updateChordIndicator('?');
+    }
     drawChord(frets, correctChordFlag);
 }
 
